@@ -11,7 +11,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.lukasgreicius.app.ui.theme.AppTheme
 
@@ -33,14 +32,8 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Home() {
+fun Home(modifier: Modifier = Modifier) {
     var text by remember { mutableStateOf("") }
-    var textColor by remember { mutableStateOf(Color.Unspecified) }
-    val colorScheme = MaterialTheme.colorScheme
-
-    LaunchedEffect(Unit) {
-        textColor = colorScheme.onSurface
-    }
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -48,20 +41,12 @@ fun Home() {
     ) {
         Text(
             text = text,
-            color = textColor,
         )
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = {
             text = "Hello, world!"
         }) {
             Text("Button")
-        }
-        if (text !== "") {
-            Button(onClick = {
-                textColor = colorScheme.error
-            }) {
-                Text("Now make it red!")
-            }
         }
     }
 }
